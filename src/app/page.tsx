@@ -1,7 +1,12 @@
-import Image from "next/image";
+import { data } from '@/utils/data'
 
 export default function Home() {
+  const { products } = data
   return (
-    <h1>Olá mundo</h1>
+    <div>
+      {products.map((product) => (
+        <div key={product.id}>{product.name}</div>
+      ))}
+    </div>
   );
 }
