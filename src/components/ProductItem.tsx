@@ -37,7 +37,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
         <ProductRate rate={product.rating} count={product.numReviews} />
         <p className='mb-2'>{product.description}</p>
         <p>R${product.price}</p>
-        <button>Adicionar no carrinho</button>
+        <AddToCart  showQty={false} product={product} increasePerClick={true} redirect={false}>
       </div>
     </div>
   )

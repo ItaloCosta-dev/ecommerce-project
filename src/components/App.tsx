@@ -1,14 +1,24 @@
 'use client'
 
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import Header from './Header'
 import CartSideBar from './CartSideBar'
+import { hideLoading } from '@/redux/slices/cartSlice';
+import { useDispatch } from 'react-redux';
 
 interface AppProps {
     children: ReactNode;
 }
 
+
+
 const App: React.FC<AppProps> = ({ children }) => {
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch (hideLoading())
+  }, [dispatch])
+
   return (
     <div>
         <div className='mr-32'>

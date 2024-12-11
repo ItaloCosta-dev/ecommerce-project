@@ -56,9 +56,9 @@ const cartSlice = createSlice({
             );
             state.taxPrice = parseFloat(addDecimals(0.15 * itemsPrice));
             state.totalPrice =
-                state.itemsPrice + state.shippingPrice + state.taxPrice;
+            state.itemsPrice + state.shippingPrice + state.taxPrice;
 
-            // Armazenar no cookie
+
             Cookies.set("cart", JSON.stringify(state));
         },
         removeFromCart: (state, action: PayloadAction<string>) => {
@@ -66,10 +66,8 @@ const cartSlice = createSlice({
                 (item) => item.id !== action.payload
             );
 
-            // Recalcular preços após remoção
             const itemsPrice = state.cartItems.reduce(
-                (acc, item) => acc + item.price * item.qty,
-                0
+                (acc, item) => acc + item.price * item.qty, 0
             );
             state.itemsPrice = parseFloat(addDecimals(itemsPrice));
             state.shippingPrice = parseFloat(
@@ -77,14 +75,16 @@ const cartSlice = createSlice({
             );
             state.taxPrice = parseFloat(addDecimals(0.15 * itemsPrice));
             state.totalPrice =
-                state.itemsPrice + state.shippingPrice + state.taxPrice;
+            state.itemsPrice + state.shippingPrice + state.taxPrice;
 
-            // Atualizar cookies
             Cookies.set("cart", JSON.stringify(state));
+        },
+        hideLoading: (state) => {
+            state.loading = false
         },
     },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, hideLoading } = cartSlice.actions;
 
 export default cartSlice.reducer;
