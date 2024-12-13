@@ -17,15 +17,22 @@ interface CartState {
     taxPrice: number
     totalPrice: number
 }
+const initialState: CartState = Cookies.get('cart')
+  ? { 
+      ...JSON.parse(Cookies.get('cart') || '{}'), 
+      loading: true, 
+      showSidebar: false 
+    }
+  : {
+      loading: true,
+      cartItems: [],
+      itemsPrice: 0,
+      shippingPrice: 0,
+      taxPrice: 0,
+      totalPrice: 0,
+    };
 
-const initialState: CartState = {
-    loading: true,
-    cartItems: [],
-    itemsPrice: 0,
-    shippingPrice: 0,
-    taxPrice: 0,
-    totalPrice: 0,
-}
+
 
 const addDecimals = (num: number): string => {
     return (Math.round(num * 100) / 100).toFixed(2)
