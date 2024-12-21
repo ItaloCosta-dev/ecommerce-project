@@ -16,7 +16,18 @@ interface CartState {
     shippingPrice: number
     taxPrice: number
     totalPrice: number
+    shippingAddress: ShippingAddress
 }
+
+interface ShippingAddress {
+    fullName: string;
+    address: string;
+    city: string;
+    postalCode: string;
+    country: string;
+}
+
+
 const initialState: CartState = Cookies.get('cart')
   ? { 
       ...JSON.parse(Cookies.get('cart') || '{}'), 
@@ -30,6 +41,13 @@ const initialState: CartState = Cookies.get('cart')
       shippingPrice: 0,
       taxPrice: 0,
       totalPrice: 0,
+      shippingAddress: {
+        fullName: '',
+        address: '',
+        city: '',
+        postalCode: '',
+        country: '',
+    },
     };
 
 
@@ -86,12 +104,16 @@ const cartSlice = createSlice({
 
             Cookies.set("cart", JSON.stringify(state));
         },
+        saveShippingAddress: (state, action: PayloadAction<ShippingAddress>) => {
+            state.shippingAddress = action.payload;
+            Cookies.set('cart', JSON.stringify(state));
+        },
         hideLoading: (state) => {
             state.loading = false
         },
     },
 });
 
-export const { addToCart, removeFromCart, hideLoading } = cartSlice.actions;
+export const { addToCart, removeFromCart, saveShippingAddress, hideLoading } = cartSlice.actions;
 
 export default cartSlice.reducer;
