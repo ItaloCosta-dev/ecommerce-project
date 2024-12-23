@@ -7,6 +7,7 @@ interface CartItem {
     name: string
     price: number
     qty: number
+    paymentMethod: string;
 }
 
 interface CartState {
@@ -48,6 +49,7 @@ const initialState: CartState = Cookies.get('cart')
         postalCode: '',
         country: '',
     },
+    paymentMethod: '',
     };
 
 
@@ -108,12 +110,16 @@ const cartSlice = createSlice({
             state.shippingAddress = action.payload;
             Cookies.set('cart', JSON.stringify(state));
         },
+        savePaymentMethod: (state, action: PayloadAction<string>) => {
+            state.paymentMethod = action.payload;
+            Cookies.set('cart', JSON.stringify(state));
+        },
         hideLoading: (state) => {
             state.loading = false
         },
     },
 });
 
-export const { addToCart, removeFromCart, saveShippingAddress, hideLoading } = cartSlice.actions;
+export const { addToCart, removeFromCart, saveShippingAddress, savePaymentMethod, hideLoading } = cartSlice.actions;
 
 export default cartSlice.reducer;
