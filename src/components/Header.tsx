@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
+import { CiShoppingCart } from "react-icons/ci";
+
 
 interface CartItem {
   qty: number;
@@ -23,11 +25,12 @@ const Header = () => {
           Carrinho de compras
         </Link>
         <div className="flex items-center space-x-4">
-          <Link href="/cart" className="relative">
-            <span className="cart-badge absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">
+                    <Link href="/cart" className="relative">
+            <span className="cart-badge absolute top-0 right-0 text-white text-xs rounded-full px-2 py-1">
               {loading ? "..." : totalItems}
             </span>
-            <span className="ml-8">Cart</span>
+            <span className="ml-8"><CiShoppingCart size={45}/>
+            </span>
           </Link>
         </div>
       </nav>
