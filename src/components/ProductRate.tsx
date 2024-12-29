@@ -18,4 +18,3 @@ const ProductRate = ({ rate, count }: ProductRateProps) => {
 }
 
 export default ProductRate
-

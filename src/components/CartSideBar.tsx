@@ -1,6 +1,7 @@
 import { removeFromCart, addToCart } from '@/redux/slices/cartSlice';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -38,8 +39,17 @@ const CartSideBar = () => {
     dispatch(removeFromCart(id));
   };
 
+  const pathname = usePathname()
+
   return (
-    <div className="fixed top-0 right-0 w-64 h-full shadow-lg border-l border-l-gray-700 overflow-y-scroll bg-white">
+    <div className={
+      loading 
+      ? ''
+      : cartItems.length > 0 &&
+      (pathname === '/' || pathname.indexOf('/product') >= 0) 
+      ? 'fixed top-0 right-0 w-32 h-full shadow-lg border-l border-l-gary-700 overflow-scroll'
+      : 'hidden'
+    }>
       {loading ? (
         <div className="py-5 px-2 text-center">Carregando...</div>
       ) : cartItems.length === 0 ? (
