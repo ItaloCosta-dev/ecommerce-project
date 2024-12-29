@@ -1,8 +1,8 @@
 "use client";
 
-import { addToCart, removeFromCart } from "@/redux/slices/cartSlice";
 import Image from "next/image";
 import Link from "next/link";
+import { addToCart, removeFromCart } from "@/redux/slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux"; 
 import { useRouter } from "next/navigation";
 
@@ -10,34 +10,39 @@ import { useRouter } from "next/navigation";
 interface CartItem {
   id: string;
   name: string;
-  price: number;
   image: string;
+  price: number;
   qty: number;
   countInStock: number;
+  
 }
 
 interface CartState {
   loading: boolean;
-  cartItems: CartItem[];
   itemsPrice: number;
+  cartItems: CartItem[];
 }
 
 export default function CartPage() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  
   const { loading, cartItems, itemsPrice } = useSelector(
-    (state: { cart: CartState }) => state.cart
+    (state: { cart: CartState }) => state.cart || { loading: false, cartItems: [], itemsPrice: 0 }
   );
 
-  const removeFromCartHandler = (id: string) => {
+ const removeFromCartHandler = (id: string) => {
+  if (id) {
     dispatch(removeFromCart(id));
-  };
+  }
+ }
 
-  const addToCartHandler = async (product: CartItem, qty: number) => {
-    dispatch(addToCart({ ...product, qty }));
-  };
+  const addToCartHandler = (product: CartItem, qty: number) => { 
+    if (product && qty > 0) {
+      dispatch(addToCart({ ...product, qty, paymentMethod:'default' }));
+    }
+  }
+
 
   return (
     <div>
@@ -57,7 +62,7 @@ export default function CartPage() {
                   <th className="p-5 text-left">Produto</th>
                   <th className="p-5 text-right">Quantidade</th>
                   <th className="p-5 text-right">Preço</th>
-                  <th className="p-5">Ação</th>
+                  <th className="p-5 text-center">Ação</th>
                 </tr>
               </thead>
               <tbody>
@@ -71,8 +76,9 @@ export default function CartPage() {
                           width={50}
                           height={50}
                           className="p-1"
+                          priority
                         />
-                        {item.name}
+                        <span className="ml-2">{item.name}</span>
                       </Link>
                     </td>
                     <td className="p-5 text-right">
@@ -81,6 +87,7 @@ export default function CartPage() {
                         onChange={(e) =>
                           addToCartHandler(item, Number(e.target.value))
                         }
+                        className="rounded-md border-gray-300"
                       >
                         {[...Array(item.countInStock).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
@@ -89,13 +96,13 @@ export default function CartPage() {
                         ))}
                       </select>
                     </td>
-                    <td className="p-5 text-right">R$ {item.price}</td>
+                    <td className="p-5 text-right">R$ {item.price.toFixed(2)}</td>
                     <td className="p-5 text-center">
                       <button
-                        className="default-button"
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                         onClick={() => removeFromCartHandler(item.id)}
                       >
-                        Delete
+                        Remover
                       </button>
                     </td>
                   </tr>
@@ -108,7 +115,7 @@ export default function CartPage() {
               <ul>
                 <li>
                   <div className="pb-3 text-xl">
-                    Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)}) : R$ {itemsPrice}
+                    Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)}) : R$ {itemsPrice.toFixed(2)}
                   </div>
                 </li>
                 <li>

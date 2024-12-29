@@ -42,25 +42,37 @@ const AddToCart: React.FC<AddToCartProps> = ({
     if (increasePerClick) {
       const existItem = cartItems.find((x) => x.id === product.id);
       if (existItem) {
-        if (existItem.qty + 1 <= product.countInStock) {
-          newQty = existItem.qty + 1;
+        if (existItem.qty + qty <= product.countInStock) {
+          newQty = existItem.qty + qty;
         } else {
-          return alert('No more product exists');
+          return alert('Quantidade excede o estoque disponível.');
         }
       }
     }
 
-    dispatch(addToCart({ ...product, qty: newQty })); 
-    if (redirect) router.push('/cart');
+    dispatch(
+      addToCart({
+        ...product,
+        qty: newQty,
+        paymentMethod: 'Cartão de crédito',
+      })
+    );
+
+    if (redirect) {
+      router.push('/cart');
+    }
   };
 
   return (
     <>
       {product.countInStock > 0 && showQty && (
         <div className="mb-2 flex justify-between">
-          <div>Qty</div>
+          <div>Quantidade</div>
           <div>
-            <select value={qty} onChange={(e) => setQty(Number(e.target.value))}>
+            <select
+              value={qty}
+              onChange={(e) => setQty(Number(e.target.value))}
+            >
               {[...Array(product.countInStock).keys()].map((x) => (
                 <option key={x + 1} value={x + 1}>
                   {x + 1}
@@ -71,12 +83,14 @@ const AddToCart: React.FC<AddToCartProps> = ({
         </div>
       )}
       <div>
-        {product.countInStock ? (
+        {product.countInStock > 0 ? (
           <button className="primary-button w-full" onClick={addToCartHandler}>
-            Add to cart
+            Adicionar ao carrinho
           </button>
         ) : (
-          <button disabled>Out of stock</button>
+          <button className="primary-button w-full" disabled>
+            Fora de estoque
+          </button>
         )}
       </div>
     </>

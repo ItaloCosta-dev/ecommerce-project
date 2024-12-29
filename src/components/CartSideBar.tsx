@@ -27,7 +27,11 @@ const CartSideBar = () => {
   const dispatch = useDispatch();
 
   const addToCartHandler = (product: CartItem, qty: number) => {
-    dispatch(addToCart({ ...product, qty }));
+    if (qty > product.countInStock) {
+      alert('Quantidade selecionada excede o estoque disponível.');
+      return;
+    }
+    dispatch(addToCart({ ...product, qty, paymentMethod: '' }));
   };
 
   const removeFromCartHandler = (id: string) => {
@@ -35,38 +39,42 @@ const CartSideBar = () => {
   };
 
   return (
-    <div className="fixed top-0 right-0 w-32 h-full shadow-lg border-l border-l-gray-700 overflow-scroll">
+    <div className="fixed top-0 right-0 w-64 h-full shadow-lg border-l border-l-gray-700 overflow-y-scroll bg-white">
       {loading ? (
-        <div className="py-5 px-2">Carregando...</div>
+        <div className="py-5 px-2 text-center">Carregando...</div>
       ) : cartItems.length === 0 ? (
-        <div className="py-5 px-2">Carrinho vazio</div>
+        <div className="py-5 px-2 text-center">Carrinho vazio</div>
       ) : (
         <>
-          <div className="p-2 flex flex-col items-center border-b border-b-gray-600">
-            <div>Sub total</div>
-            <div className="font-bold text-orange-700">R${itemsPrice}</div>
-            <div>
-              <Link href="/cart" className="w-full text-center p-1 rounded-2xl border-2">
-                Ir para o carrinho
-              </Link>
+          <div className="p-4 flex flex-col items-center border-b border-b-gray-600">
+            <div className="text-lg">Subtotal</div>
+            <div className="font-bold text-orange-700">
+              R${itemsPrice.toFixed(2)}
             </div>
+            <Link
+              href="/cart"
+              className="mt-2 w-full text-center p-2 rounded-2xl border-2 border-orange-700 text-orange-700 hover:bg-orange-700 hover:text-white"
+            >
+              Ir para o carrinho
+            </Link>
           </div>
           <div>
             {cartItems.map((item) => (
               <div
                 key={item.id}
-                className="p-2 flex flex-col items-center border-b border-b-gray-600"
+                className="p-4 flex flex-col items-center border-b border-b-gray-600"
               >
-                <Link href={`/product/${item.id}`} className="flex items-center">
+                <Link href={`/product/${item.id}`}>
                   <Image
                     src={item.image}
                     alt={item.name}
                     width={50}
                     height={50}
-                    className="p-1"
+                    className="rounded"
                   />
                 </Link>
                 <select
+                  className="mt-2 p-1 border border-gray-300 rounded"
                   value={item.qty}
                   onChange={(e) => addToCartHandler(item, Number(e.target.value))}
                 >
@@ -77,7 +85,7 @@ const CartSideBar = () => {
                   ))}
                 </select>
                 <button
-                  className="default-button mt-2"
+                  className="default-button mt-2 bg-red-500 text-white px-4 py-1 rounded hover:bg-red-700"
                   onClick={() => removeFromCartHandler(item.id)}
                 >
                   Deletar
