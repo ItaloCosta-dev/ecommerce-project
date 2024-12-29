@@ -26,7 +26,7 @@ const Header = () => {
         </Link>
         <div className="flex items-center space-x-4">
                     <Link href="/cart" className="relative">
-            <span className="cart-badge absolute top-0 right-0 text-white text-xs rounded-full px-2 py-1">
+            <span className="cart-badge absolute top-0 right-0 text-white rounded-full px-2 py-1">
               {loading ? "..." : totalItems}
             </span>
             <span className="ml-8"><CiShoppingCart size={45}/>

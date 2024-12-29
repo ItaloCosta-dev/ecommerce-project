@@ -12,7 +12,7 @@ interface CartItem {
   name: string;
   image: string;
   price: number;
-  quantity: number;
+  qty: number;
 }
 
 interface CartState {
@@ -121,10 +121,10 @@ const PlaceOrderScreen = () => {
                           {item.name}
                         </Link>
                       </td>
-                      <td className="p-5 text-right">{item.quantity}</td>
+                      <td className="p-5 text-right">{item.qty}</td>
                       <td className="p-5 text-right">R${item.price}</td>
                       <td className="p-5 text-right">
-                        R${item.quantity * item.price}
+                        R${item.qty * item.price}
                       </td>
                     </tr>
                   ))}
