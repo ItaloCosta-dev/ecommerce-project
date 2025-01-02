@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface ProductDetailPageProps {
-  params: Record<string, string>
+  params: { id: string };
 }
 
 export default function ProductDetailPage({ params: { id } }: ProductDetailPageProps) {
@@ -24,7 +24,6 @@ export default function ProductDetailPage({ params: { id } }: ProductDetailPageP
       </div>
 
       <div className="grid md:grid-cols-4 md:gap-3">
-        {/* Imagem do produto */}
         <div className="md:col-span-2">
           <Image
             src={product.image}
@@ -36,17 +35,14 @@ export default function ProductDetailPage({ params: { id } }: ProductDetailPageP
           />
         </div>
 
-        {/* Detalhes do produto */}
         <div>
           <ul>
             <li>
               <h1 className="text-lg font-semibold">{product.name}</h1>
             </li>
-
             <li className="my-2">
               <ProductRate rate={product.rating} count={product.numReviews} />
             </li>
-
             <li className="my-3">
               <hr className="my-3" />
               <h2 className="font-medium">Descrição:</h2>
@@ -55,7 +51,6 @@ export default function ProductDetailPage({ params: { id } }: ProductDetailPageP
           </ul>
         </div>
 
-        {/* Card de preço e adicionar ao carrinho */}
         <div>
           <div className="card p-5 border rounded-lg shadow-md">
             <div className="mb-2 flex justify-between">
