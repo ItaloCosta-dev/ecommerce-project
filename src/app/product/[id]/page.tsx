@@ -8,6 +8,12 @@ interface ProductDetailPageProps {
   params: { id: string };
 }
 
+export async function generateStaticParams()
+ {
+  return data.products.map((product) => ({
+    id: product.id,
+  }))
+ }
 export default function ProductDetailPage({ params: { id } }: ProductDetailPageProps) {
   const product = data.products.find((x) => x.id === id);
 
