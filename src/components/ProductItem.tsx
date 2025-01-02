@@ -24,7 +24,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
     <div className="card">
       <Link href={`/product/${product.id}`} aria-label={`Ver detalhes do produto ${product.name}`}>
         <Image
-          src={product.image || '/placeholder-image.jpg'} // Fallback para imagem padrão
+          src={product.image || '/placeholder-image.jpg'} 
           width={400}
           height={400}
           alt={product.name}

@@ -4,14 +4,23 @@ import { data } from '@/utils/data';
 import Image from 'next/image';
 import Link from 'next/link';
 
+
 export async function generateStaticParams() {
   return data.products.map((product) => ({
     id: product.id,
   }));
 }
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
-  const product = data.products.find((x) => x.id === params.id);
+export default async function ProductDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  
+  const { id } = await params;
+
+
+  const product = data.products.find((x) => x.id === id);
 
   if (!product) {
     return <div className="text-center text-red-500">Produto não encontrado</div>;
