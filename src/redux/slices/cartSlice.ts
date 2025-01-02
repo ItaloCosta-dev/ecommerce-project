@@ -12,7 +12,7 @@ interface CartItem {
 interface CartState {
   loading: boolean;
   cartItems: CartItem[];
-  itemsPrice: number;
+  itemPrice: number;
   shippingPrice: number;
   taxPrice: number;
   totalPrice: number;
@@ -42,7 +42,7 @@ const initialState: CartState = Cookies.get("cart")
   : {
       loading: false,
       cartItems: [],
-      itemsPrice: 0,
+      itemPrice: 0,
       shippingPrice: 0,
       taxPrice: 0,
       totalPrice: 0,
@@ -79,13 +79,13 @@ const cartSlice = createSlice({
         (acc, item) => acc + item.price * item.qty,
         0
       );
-      state.itemsPrice = parseFloat(addDecimals(itemsPrice));
+      state.itemPrice = parseFloat(addDecimals(itemsPrice));
       state.shippingPrice = parseFloat(
         addDecimals(itemsPrice > 100 ? 0 : 100)
       );
       state.taxPrice = parseFloat(addDecimals(0.15 * itemsPrice));
       state.totalPrice =
-        state.itemsPrice + state.shippingPrice + state.taxPrice;
+        state.itemPrice + state.shippingPrice + state.taxPrice;
 
       // Salvar no cookie
       Cookies.set("cart", JSON.stringify(state));
@@ -102,13 +102,13 @@ const cartSlice = createSlice({
         (acc, item) => acc + item.price * item.qty,
         0
       );
-      state.itemsPrice = parseFloat(addDecimals(itemsPrice));
+      state.itemPrice = parseFloat(addDecimals(itemsPrice));
       state.shippingPrice = parseFloat(
         addDecimals(itemsPrice > 100 ? 0 : 100)
       );
       state.taxPrice = parseFloat(addDecimals(0.15 * itemsPrice));
       state.totalPrice =
-        state.itemsPrice + state.shippingPrice + state.taxPrice;
+        state.itemPrice + state.shippingPrice + state.taxPrice;
 
       // Salvar no cookie
       Cookies.set("cart", JSON.stringify(state));
