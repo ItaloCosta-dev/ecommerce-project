@@ -5,9 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface ProductDetailPageProps {
-  params: {
-    id: string;
-  };
+  params: Record<string, string>
 }
 
 export default function ProductDetailPage({ params: { id } }: ProductDetailPageProps) {
