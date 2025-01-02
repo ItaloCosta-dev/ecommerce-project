@@ -4,18 +4,14 @@ import { data } from '@/utils/data';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface ProductDetailPageProps {
-  params: { id: string };
-}
-
-export async function generateStaticParams()
- {
+export async function generateStaticParams() {
   return data.products.map((product) => ({
     id: product.id,
-  }))
- }
-export default function ProductDetailPage({ params: { id } }: ProductDetailPageProps) {
-  const product = data.products.find((x) => x.id === id);
+  }));
+}
+
+export default function ProductDetailPage({ params }: { params: { id: string } }) {
+  const product = data.products.find((x) => x.id === params.id);
 
   if (!product) {
     return <div className="text-center text-red-500">Produto não encontrado</div>;
