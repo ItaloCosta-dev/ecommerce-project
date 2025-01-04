@@ -55,8 +55,8 @@ Este projeto tem como objetivo melhorar a experiência do usuário em lojas virt
 ## Sobre o Desenvolvedor
 
 - **Nome**: Italo Costa - Desenvolvedor React Júnior
-[Meu LinkedIn](https://www.linkedin.com/in/italo-costa-dev/)
-[Deploy do Projeto](https://ecommerce-project-orpin-gamma.vercel.app/)
+- [Meu LinkedIn](https://www.linkedin.com/in/italo-costa-dev/)
+- [Deploy do Projeto](https://ecommerce-project-orpin-gamma.vercel.app/)
 
 
 
