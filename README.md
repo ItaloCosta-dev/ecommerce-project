@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Projeto Carrinho de Compras
 
-## Getting Started
+Este projeto consiste em um carrinho de compras para uma loja virtual, permitindo que os usuários selecionem produtos, vejam o valor total da compra e realizem o checkout.
 
-First, run the development server:
+## Como Funciona
+1. O usuário navega pela loja e adiciona itens ao carrinho.
+2. Ao acessar a página do carrinho, o usuário pode visualizar os itens selecionados, suas quantidades e preços.
+3. O total da compra é automaticamente atualizado conforme o usuário altera a quantidade ou remove itens do carrinho.
+4. O usuário pode proceder para o checkout e finalizar a compra.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Este projeto tem como objetivo melhorar a experiência do usuário em lojas virtuais, facilitando o processo de compra e visualização do carrinho.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Funcionalidades Principais
+- **Adição e remoção de produtos**: Os usuários podem adicionar produtos ao carrinho e remover itens conforme necessário.
+- **Cálculo de preço total**: O preço total do carrinho é calculado com base nos itens e nas quantidades selecionadas, incluindo possíveis descontos e taxas.
+- **Alteração de quantidade**: O usuário pode alterar a quantidade de cada produto diretamente no carrinho, e o valor total será ajustado automaticamente.
+- **Exibição de produtos**: Os produtos no carrinho exibem nome, preço e imagem, permitindo ao usuário visualizar todos os itens antes de finalizar a compra.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tecnologias Utilizadas
+- **React.js**: Biblioteca para a construção da interface do usuário.
+- **Next.js**: Framework React para otimização de desempenho e funcionalidades avançadas como renderização do lado servidor.
+- **TypeScript**: Linguagem para garantir a tipagem estática e evitar erros durante o desenvolvimento.
+- **Tailwind CSS**: Framework CSS utilitário para estilização da interface, oferecendo um design responsivo e moderno.
 
-## Learn More
+## Bibliotecas e Versões Utilizadas
 
-To learn more about Next.js, take a look at the following resources:
+### Dependências
+- **@reduxjs/toolkit**: ^2.4.0
+- **@smastrom/react-rating**: ^1.5.0
+- **@types/js-cookie**: ^3.0.6
+- **js-cookie**: ^3.0.5
+- **next**: 15.0.4
+- **react**: ^18.3.1
+- **react-dom**: ^18.3.1
+- **react-hook-form**: ^7.54.1
+- **react-icons**: ^5.4.0
+- **react-redux**: 9.1.2
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Dependências de Desenvolvimento
+- **@types/node**: ^20
+- **@types/react**: 18.3.14
+- **@types/react-dom**: ^18.2.14
+- **@types/react-redux**: ^7.1.34
+- **postcss**: ^8
+- **tailwindcss**: ^3.4.1
+- **typescript**: ^5
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Resoluções
+- **react**: ^18.3.1
+- **react-dom**: ^18.3.1
+- **@types/react**: ^18.3.14
+- **@types/react-dom**: ^18.3.14
 
-## Deploy on Vercel
+## Sobre o Desenvolvedor
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Nome**: Italo Costa - Desenvolvedor React Júnior
+[Meu LinkedIn](https://www.linkedin.com/in/italo-costa-dev/)
+[Deploy do Projeto](https://ecommerce-project-orpin-gamma.vercel.app/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
