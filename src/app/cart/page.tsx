@@ -19,7 +19,7 @@ interface CartItem {
 
 interface CartState {
   loading: boolean;
-  itemsPrice: number;
+  itemPrice: number;
   cartItems: CartItem[];
 }
 
@@ -27,8 +27,8 @@ export default function CartPage() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { loading, cartItems, itemsPrice } = useSelector(
-    (state: { cart: CartState }) => state.cart || { loading: false, cartItems: [], itemsPrice: 0 }
+  const { loading, cartItems, itemPrice } = useSelector(
+    (state: { cart: CartState }) => state.cart || { loading: false, cartItems: [], itemPrice: 0 }
   );
 
  const removeFromCartHandler = (id: string) => {
@@ -115,7 +115,7 @@ export default function CartPage() {
               <ul>
                 <li>
                   <div className="pb-3 text-xl">
-                    Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)}) : R$ {itemsPrice.toFixed(2)}
+                    Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)}) : R$ {itemPrice.toFixed(2)}
                   </div>
                 </li>
                 <li>
