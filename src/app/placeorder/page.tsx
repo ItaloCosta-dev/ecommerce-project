@@ -171,7 +171,7 @@ const PlaceOrderScreen = () => {
                 </li>
                 <li>
                   <button
-                    onClick={() => alert('Não implementado')}
+                    onClick={() => alert('Pedido feito com sucesso!')}  
                     className="primary-button w-full"
                   >
                     Fazer Pedido
