@@ -75,15 +75,15 @@ const cartSlice = createSlice({
       }
 
       // Atualizar preços
-      const itemsPrice = state.cartItems.reduce(
+      const itemPrice = state.cartItems.reduce(
         (acc, item) => acc + item.price * item.qty,
         0
       );
-      state.itemPrice = parseFloat(addDecimals(itemsPrice));
+      state.itemPrice = parseFloat(addDecimals(itemPrice));
       state.shippingPrice = parseFloat(
-        addDecimals(itemsPrice > 100 ? 0 : 100)
+        addDecimals(itemPrice > 100 ? 0 : 100)
       );
-      state.taxPrice = parseFloat(addDecimals(0.15 * itemsPrice));
+      state.taxPrice = parseFloat(addDecimals(0.15 * itemPrice));
       state.totalPrice =
         state.itemPrice + state.shippingPrice + state.taxPrice;
 

@@ -17,11 +17,11 @@ interface CartItem {
 interface CartState {
   loading: boolean;
   cartItems: CartItem[];
-  itemsPrice: number;
+  itemPrice: number;
 }
 
 const CartSideBar = () => {
-  const { loading, cartItems, itemsPrice } = useSelector(
+  const { loading, cartItems, itemPrice } = useSelector(
     (state: { cart: CartState }) => state.cart
   );
 
@@ -59,7 +59,7 @@ const CartSideBar = () => {
           <div className="p-4 flex flex-col items-center border-b border-b-gray-600">
             <div className="text-lg">Subtotal</div>
             <div className="font-bold text-orange-700">
-              R${itemsPrice.toFixed(2)}
+              R${itemPrice.toFixed(2)}
             </div>
             <Link
               href="/cart"
